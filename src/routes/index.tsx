@@ -100,7 +100,7 @@ function Landing() {
 
       <main>
         <section className="relative overflow-hidden">
-          <div className="pointer-events-none absolute inset-x-0 -top-40 h-80 bg-[radial-gradient(60%_60%_at_50%_50%,hsl(var(--ring)/0.18),transparent)]" />
+          <div className="pointer-events-none absolute inset-x-0 -top-40 h-80 bg-[radial-gradient(60%_60%_at_50%_50%,var(--accent),transparent)] opacity-60" />
           <div className="mx-auto grid max-w-6xl items-center gap-12 px-5 py-20 md:py-28 lg:grid-cols-[1.05fr_0.95fr]">
             <div>
               <Badge variant="secondary" className="mb-5 rounded-full px-3 py-1">
@@ -148,14 +148,14 @@ function Landing() {
                   </span>
                   <span className="rounded-md px-2 py-0.5 text-xs text-muted-foreground">EN</span>
                 </div>
-                <div className="space-y-3 rounded-xl bg-[hsl(var(--paper))] p-6 text-[hsl(var(--paper-ink))] shadow-inner">
+                <div className="space-y-3 rounded-xl bg-paper p-6 text-paper-ink shadow-inner">
                   <p className="font-display text-xl font-bold tracking-tight">
                     Anthony RAKOTOMANGA
                   </p>
-                  <p className="text-sm text-[hsl(var(--paper-muted))]">
+                  <p className="text-sm text-paper-muted">
                     Développeur Ruby on Rails · Antananarivo
                   </p>
-                  <div className="h-px bg-[hsl(var(--paper-rule))]" />
+                  <div className="h-px bg-paper-rule" />
                   {[
                     ["Expériences", "92%"],
                     ["Compétences", "70%"],
@@ -165,8 +165,8 @@ function Landing() {
                       <p className="text-[11px] font-semibold uppercase tracking-[0.14em]">
                         {label}
                       </p>
-                      <div className="h-2 rounded bg-[hsl(var(--paper-rule))]" style={{ width: w }} />
-                      <div className="h-2 w-2/3 rounded bg-[hsl(var(--paper-rule))]" />
+                      <div className="h-2 rounded bg-paper-rule" style={{ width: w }} />
+                      <div className="h-2 w-2/3 rounded bg-paper-rule" />
                     </div>
                   ))}
                 </div>
