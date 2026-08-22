@@ -102,7 +102,7 @@ function ItemShell({
 function move<T>(arr: T[], from: number, to: number) {
   if (to < 0 || to >= arr.length) return arr;
   const next = [...arr];
-  const [item] = next.splice(from, 1);
+  const [item] = next.splice(from, 1) as [T];
   next.splice(to, 0, item);
   return next;
 }
@@ -221,23 +221,23 @@ export function BuilderForm({
                     <Field
                       label="Entreprise"
                       value={e.company}
-                      onChange={(v) => update((d) => ((d.experiences[i].company = v), d))}
+                      onChange={(v) => update((d) => ((d.experiences[i]!.company = v), d))}
                     />
                     <Field
                       label={`Poste (${langTag})`}
                       value={e.role[lang]}
-                      onChange={(v) => update((d) => ((d.experiences[i].role[lang] = v), d))}
+                      onChange={(v) => update((d) => ((d.experiences[i]!.role[lang] = v), d))}
                     />
                     <Field
                       label="Début"
                       placeholder="Oct '25"
                       value={e.start}
-                      onChange={(v) => update((d) => ((d.experiences[i].start = v), d))}
+                      onChange={(v) => update((d) => ((d.experiences[i]!.start = v), d))}
                     />
                     <Field
                       label="Fin (vide = aujourd'hui)"
                       value={e.end}
-                      onChange={(v) => update((d) => ((d.experiences[i].end = v), (d.experiences[i].current = !v), d))}
+                      onChange={(v) => update((d) => ((d.experiences[i]!.end = v), (d.experiences[i]!.current = !v), d))}
                     />
                   </div>
                   <Field
@@ -245,13 +245,13 @@ export function BuilderForm({
                     textarea
                     rows={4}
                     value={e.bullets[lang].join("\n")}
-                    onChange={(v) => update((d) => ((d.experiences[i].bullets[lang] = v.split("\n")), d))}
+                    onChange={(v) => update((d) => ((d.experiences[i]!.bullets[lang] = v.split("\n")), d))}
                   />
                   <Field
                     label="Technologies (séparées par des virgules)"
                     value={e.tech.join(", ")}
                     onChange={(v) =>
-                      update((d) => ((d.experiences[i].tech = v.split(",").map((s) => s.trim()).filter(Boolean)), d))
+                      update((d) => ((d.experiences[i]!.tech = v.split(",").map((s) => s.trim()).filter(Boolean)), d))
                     }
                   />
                 </ItemShell>
@@ -300,20 +300,20 @@ export function BuilderForm({
                   onDown={() => update((d) => ((d.educations = move(d.educations, i, i + 1)), d))}
                 >
                   <div className="grid gap-3 sm:grid-cols-2">
-                    <Field label="École" value={d0.school} onChange={(v) => update((d) => ((d.educations[i].school = v), d))} />
-                    <Field label="Lieu" value={d0.location} onChange={(v) => update((d) => ((d.educations[i].location = v), d))} />
+                    <Field label="École" value={d0.school} onChange={(v) => update((d) => ((d.educations[i]!.school = v), d))} />
+                    <Field label="Lieu" value={d0.location} onChange={(v) => update((d) => ((d.educations[i]!.location = v), d))} />
                     <Field
                       label={`Diplôme (${langTag})`}
                       value={d0.degree[lang]}
-                      onChange={(v) => update((d) => ((d.educations[i].degree[lang] = v), d))}
+                      onChange={(v) => update((d) => ((d.educations[i]!.degree[lang] = v), d))}
                     />
                     <Field
                       label={`Spécialité (${langTag})`}
                       value={d0.field[lang]}
-                      onChange={(v) => update((d) => ((d.educations[i].field[lang] = v), d))}
+                      onChange={(v) => update((d) => ((d.educations[i]!.field[lang] = v), d))}
                     />
-                    <Field label="Début" value={d0.start} onChange={(v) => update((d) => ((d.educations[i].start = v), d))} />
-                    <Field label="Fin" value={d0.end} onChange={(v) => update((d) => ((d.educations[i].end = v), d))} />
+                    <Field label="Début" value={d0.start} onChange={(v) => update((d) => ((d.educations[i]!.start = v), d))} />
+                    <Field label="Fin" value={d0.end} onChange={(v) => update((d) => ((d.educations[i]!.end = v), d))} />
                   </div>
                 </ItemShell>
               ))}
@@ -353,13 +353,13 @@ export function BuilderForm({
                     <Field
                       label={`Catégorie (${langTag})`}
                       value={g.name[lang]}
-                      onChange={(v) => update((d) => ((d.skills[i].name[lang] = v), d))}
+                      onChange={(v) => update((d) => ((d.skills[i]!.name[lang] = v), d))}
                     />
                     <Field
                       label="Compétences (virgules)"
                       value={g.items.join(", ")}
                       onChange={(v) =>
-                        update((d) => ((d.skills[i].items = v.split(",").map((s) => s.trim()).filter(Boolean)), d))
+                        update((d) => ((d.skills[i]!.items = v.split(",").map((s) => s.trim()).filter(Boolean)), d))
                       }
                     />
                   </div>
@@ -405,12 +405,12 @@ export function BuilderForm({
                     <Field
                       label={`Langue (${langTag})`}
                       value={l.name[lang]}
-                      onChange={(v) => update((d) => ((d.languages[i].name[lang] = v), d))}
+                      onChange={(v) => update((d) => ((d.languages[i]!.name[lang] = v), d))}
                     />
                     <Field
                       label={`Niveau (${langTag})`}
                       value={l.level[lang]}
-                      onChange={(v) => update((d) => ((d.languages[i].level[lang] = v), d))}
+                      onChange={(v) => update((d) => ((d.languages[i]!.level[lang] = v), d))}
                     />
                   </div>
                 </ItemShell>
@@ -451,14 +451,14 @@ export function BuilderForm({
                     <Field
                       label={`Intitulé (${langTag})`}
                       value={c.name[lang]}
-                      onChange={(v) => update((d) => ((d.certifications[i].name[lang] = v), d))}
+                      onChange={(v) => update((d) => ((d.certifications[i]!.name[lang] = v), d))}
                     />
                     <Field
                       label="Organisme"
                       value={c.issuer}
-                      onChange={(v) => update((d) => ((d.certifications[i].issuer = v), d))}
+                      onChange={(v) => update((d) => ((d.certifications[i]!.issuer = v), d))}
                     />
-                    <Field label="Date" value={c.date} onChange={(v) => update((d) => ((d.certifications[i].date = v), d))} />
+                    <Field label="Date" value={c.date} onChange={(v) => update((d) => ((d.certifications[i]!.date = v), d))} />
                   </div>
                 </ItemShell>
               ))}
@@ -495,20 +495,20 @@ export function BuilderForm({
                   onDown={() => update((d) => ((d.projects = move(d.projects, i, i + 1)), d))}
                 >
                   <div className="grid gap-3 sm:grid-cols-2">
-                    <Field label="Nom" value={p.name} onChange={(v) => update((d) => ((d.projects[i].name = v), d))} />
-                    <Field label="URL" value={p.url} onChange={(v) => update((d) => ((d.projects[i].url = v), d))} />
+                    <Field label="Nom" value={p.name} onChange={(v) => update((d) => ((d.projects[i]!.name = v), d))} />
+                    <Field label="URL" value={p.url} onChange={(v) => update((d) => ((d.projects[i]!.url = v), d))} />
                   </div>
                   <Field
                     label={`Description (${langTag})`}
                     textarea
                     value={p.description[lang]}
-                    onChange={(v) => update((d) => ((d.projects[i].description[lang] = v), d))}
+                    onChange={(v) => update((d) => ((d.projects[i]!.description[lang] = v), d))}
                   />
                   <Field
                     label="Technologies (virgules)"
                     value={p.tech.join(", ")}
                     onChange={(v) =>
-                      update((d) => ((d.projects[i].tech = v.split(",").map((s) => s.trim()).filter(Boolean)), d))
+                      update((d) => ((d.projects[i]!.tech = v.split(",").map((s) => s.trim()).filter(Boolean)), d))
                     }
                   />
                 </ItemShell>
@@ -550,8 +550,8 @@ export function BuilderForm({
         <div className="space-y-3">
           {resume.profile.links.map((l, i) => (
             <div key={l.id} className="grid gap-3 sm:grid-cols-[1fr_2fr_auto] sm:items-end">
-              <Field label="Libellé" value={l.label} onChange={(v) => update((d) => ((d.profile.links[i].label = v), d))} />
-              <Field label="URL" value={l.url} onChange={(v) => update((d) => ((d.profile.links[i].url = v), d))} />
+              <Field label="Libellé" value={l.label} onChange={(v) => update((d) => ((d.profile.links[i]!.label = v), d))} />
+              <Field label="URL" value={l.url} onChange={(v) => update((d) => ((d.profile.links[i]!.url = v), d))} />
               <Button
                 variant="ghost"
                 size="icon"

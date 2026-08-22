@@ -21,5 +21,5 @@ export const UI: Dict = {
   technologies: { fr: "Technologies", en: "Technologies" },
 };
 
-export const t = (key: keyof typeof UI, lang: Lang) => UI[key][lang];
+export const t = (key: keyof typeof UI, lang: Lang) => UI[key]![lang];
 export const sectionLabel = (key: SectionKey, lang: Lang) => SECTION_LABELS[key][lang];
