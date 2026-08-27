@@ -1,6 +1,6 @@
 import type { TemplateProps } from "./shared";
 import { dateRange, fullName, visibleSections } from "./shared";
-import { sectionLabel } from "@/lib/cv/i18n";
+import { sectionLabel, t } from "@/lib/cv/i18n";
 import type { SectionKey } from "@/lib/cv/types";
 
 function Heading({ children }: { children: React.ReactNode }) {
