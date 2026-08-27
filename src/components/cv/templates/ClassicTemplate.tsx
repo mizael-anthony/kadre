@@ -38,7 +38,10 @@ export function ClassicTemplate({ resume, lang }: TemplateProps) {
                   ))}
                 </ul>
                 {e.tech.length > 0 && (
-                  <p className="mt-1 text-[8.5pt] italic text-paper-muted">{e.tech.join(" · ")}</p>
+                  <p className="mt-1 text-[8.5pt] italic text-paper-muted">
+                    <span className="font-semibold not-italic">{t("techLabel", lang)} : </span>
+                    {e.tech.join(" · ")}
+                  </p>
                 )}
               </article>
             ))}
