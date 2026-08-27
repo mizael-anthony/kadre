@@ -87,7 +87,10 @@ export function MinimalTemplate({ resume, lang }: TemplateProps) {
               <article key={pr.id} className="text-[9.5pt] text-paper-ink">
                 <span className="font-semibold">{pr.name}</span> — {pr.description[lang]}
                 {pr.tech.length > 0 && (
-                  <span className="text-paper-muted"> ({pr.tech.join(", ")})</span>
+                  <span className="text-paper-muted">
+                    {" "}
+                    ({t("techLabel", lang)} : {pr.tech.join(", ")})
+                  </span>
                 )}
               </article>
             ))}
