@@ -174,6 +174,7 @@ export function BuilderForm({
               label={`Résumé (${langTag})`}
               textarea
               rows={7}
+              ai={lang}
               value={resume.summary[lang]}
               onChange={(v) => update((d) => ((d.summary[lang] = v), d))}
             />
