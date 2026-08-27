@@ -19,6 +19,8 @@ export const UI: Dict = {
   links: { fr: "Liens", en: "Links" },
   contact: { fr: "Contact", en: "Contact" },
   technologies: { fr: "Technologies", en: "Technologies" },
+  /** Petit label affiché devant la stack technique d'une expérience ou d'un projet. */
+  techLabel: { fr: "Compétences", en: "Skills" },
 };
 
 export const t = (key: keyof typeof UI, lang: Lang) => UI[key]![lang];
