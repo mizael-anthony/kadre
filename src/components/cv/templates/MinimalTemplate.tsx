@@ -30,7 +30,12 @@ export function MinimalTemplate({ resume, lang }: TemplateProps) {
                   ))}
                 </ul>
                 {e.tech.length > 0 && (
-                  <p className="mt-1 text-[8.5pt] text-paper-muted">{e.tech.join(", ")}</p>
+                  <p className="mt-1 text-[8.5pt] text-paper-muted">
+                    <span className="font-semibold uppercase tracking-wide">
+                      {t("techLabel", lang)} —{" "}
+                    </span>
+                    {e.tech.join(", ")}
+                  </p>
                 )}
               </article>
             ))}
