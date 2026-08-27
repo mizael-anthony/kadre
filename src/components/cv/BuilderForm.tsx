@@ -233,6 +233,7 @@ export function BuilderForm({
                     />
                     <Field
                       label={`Poste (${langTag})`}
+                      ai={lang}
                       value={e.role[lang]}
                       onChange={(v) => update((d) => ((d.experiences[i]!.role[lang] = v), d))}
                     />
