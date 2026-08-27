@@ -511,6 +511,7 @@ export function BuilderForm({
                   <Field
                     label={`Description (${langTag})`}
                     textarea
+                    ai={lang}
                     value={p.description[lang]}
                     onChange={(v) => update((d) => ((d.projects[i]!.description[lang] = v), d))}
                   />
