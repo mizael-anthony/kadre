@@ -103,7 +103,10 @@ export function ClassicTemplate({ resume, lang }: TemplateProps) {
                 <h3 className="text-[10pt] font-semibold text-paper-ink">{pr.name}</h3>
                 <p className="text-[9.5pt] leading-[1.5] text-paper-ink">{pr.description[lang]}</p>
                 {pr.tech.length > 0 && (
-                  <p className="text-[8.5pt] italic text-paper-muted">{pr.tech.join(" · ")}</p>
+                  <p className="text-[8.5pt] italic text-paper-muted">
+                    <span className="font-semibold not-italic">{t("techLabel", lang)} : </span>
+                    {pr.tech.join(" · ")}
+                  </p>
                 )}
               </article>
             ))}
