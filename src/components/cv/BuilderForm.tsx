@@ -253,6 +253,7 @@ export function BuilderForm({
                     label={`Réalisations (${langTag}) — une par ligne`}
                     textarea
                     rows={4}
+                    ai={lang}
                     value={e.bullets[lang].join("\n")}
                     onChange={(v) => update((d) => ((d.experiences[i]!.bullets[lang] = v.split("\n")), d))}
                   />
