@@ -42,7 +42,10 @@ export function ModernTemplate({ resume, lang }: TemplateProps) {
                   ))}
                 </ul>
                 {e.tech.length > 0 && (
-                  <div className="mt-1.5 flex flex-wrap gap-1">
+                  <div className="mt-1.5 flex flex-wrap items-center gap-1">
+                    <span className="text-[7.5pt] font-bold uppercase tracking-wide text-paper-muted">
+                      {t("techLabel", lang)}
+                    </span>
                     {e.tech.map((tech) => (
                       <span
                         key={tech}
