@@ -1,6 +1,6 @@
 import type { TemplateProps } from "./shared";
 import { dateRange, fullName, visibleSections } from "./shared";
-import { sectionLabel } from "@/lib/cv/i18n";
+import { sectionLabel, t } from "@/lib/cv/i18n";
 import type { SectionKey } from "@/lib/cv/types";
 
 export function MinimalTemplate({ resume, lang }: TemplateProps) {
@@ -30,7 +30,12 @@ export function MinimalTemplate({ resume, lang }: TemplateProps) {
                   ))}
                 </ul>
                 {e.tech.length > 0 && (
-                  <p className="mt-1 text-[8.5pt] text-paper-muted">{e.tech.join(", ")}</p>
+                  <p className="mt-1 text-[8.5pt] text-paper-muted">
+                    <span className="font-semibold uppercase tracking-wide">
+                      {t("techLabel", lang)} —{" "}
+                    </span>
+                    {e.tech.join(", ")}
+                  </p>
                 )}
               </article>
             ))}
@@ -82,7 +87,10 @@ export function MinimalTemplate({ resume, lang }: TemplateProps) {
               <article key={pr.id} className="text-[9.5pt] text-paper-ink">
                 <span className="font-semibold">{pr.name}</span> — {pr.description[lang]}
                 {pr.tech.length > 0 && (
-                  <span className="text-paper-muted"> ({pr.tech.join(", ")})</span>
+                  <span className="text-paper-muted">
+                    {" "}
+                    ({t("techLabel", lang)} : {pr.tech.join(", ")})
+                  </span>
                 )}
               </article>
             ))}

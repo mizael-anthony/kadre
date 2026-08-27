@@ -1,6 +1,6 @@
 import type { TemplateProps } from "./shared";
 import { dateRange, fullName, visibleSections } from "./shared";
-import { sectionLabel } from "@/lib/cv/i18n";
+import { sectionLabel, t } from "@/lib/cv/i18n";
 import type { SectionKey } from "@/lib/cv/types";
 
 function Heading({ children }: { children: React.ReactNode }) {
@@ -38,7 +38,10 @@ export function ClassicTemplate({ resume, lang }: TemplateProps) {
                   ))}
                 </ul>
                 {e.tech.length > 0 && (
-                  <p className="mt-1 text-[8.5pt] italic text-paper-muted">{e.tech.join(" · ")}</p>
+                  <p className="mt-1 text-[8.5pt] italic text-paper-muted">
+                    <span className="font-semibold not-italic">{t("techLabel", lang)} : </span>
+                    {e.tech.join(" · ")}
+                  </p>
                 )}
               </article>
             ))}
@@ -100,7 +103,10 @@ export function ClassicTemplate({ resume, lang }: TemplateProps) {
                 <h3 className="text-[10pt] font-semibold text-paper-ink">{pr.name}</h3>
                 <p className="text-[9.5pt] leading-[1.5] text-paper-ink">{pr.description[lang]}</p>
                 {pr.tech.length > 0 && (
-                  <p className="text-[8.5pt] italic text-paper-muted">{pr.tech.join(" · ")}</p>
+                  <p className="text-[8.5pt] italic text-paper-muted">
+                    <span className="font-semibold not-italic">{t("techLabel", lang)} : </span>
+                    {pr.tech.join(" · ")}
+                  </p>
                 )}
               </article>
             ))}
