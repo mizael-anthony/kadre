@@ -7,6 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Separator } from "@/components/ui/separator";
+import { AiAssistButton, AiProBanner } from "@/components/cv/AiAssistButton";
 
 type Update = (mutate: (draft: Resume) => Resume) => void;
 
@@ -17,6 +18,7 @@ function Field({
   placeholder,
   textarea,
   rows = 3,
+  ai,
 }: {
   label: string;
   value: string;
@@ -24,13 +26,18 @@ function Field({
   placeholder?: string;
   textarea?: boolean;
   rows?: number;
+  /** Langue à assister ; affiche le bouton IA (Pro) à côté du libellé. */
+  ai?: Lang;
 }) {
   const id = `f-${label.replace(/\s+/g, "-").toLowerCase()}-${useIdSuffix()}`;
   return (
     <div className="space-y-1.5">
-      <Label htmlFor={id} className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
-        {label}
-      </Label>
+      <div className="flex min-h-6 items-center justify-between gap-2">
+        <Label htmlFor={id} className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+          {label}
+        </Label>
+        {ai && <AiAssistButton fieldLabel={label} lang={ai} sample={value} />}
+      </div>
       {textarea ? (
         <Textarea id={id} rows={rows} value={value} placeholder={placeholder} onChange={(e) => onChange(e.target.value)} />
       ) : (
