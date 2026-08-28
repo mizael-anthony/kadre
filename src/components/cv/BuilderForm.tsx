@@ -532,6 +532,7 @@ export function BuilderForm({
 
   return (
     <div className="space-y-4">
+      <AiProBanner />
       <Card title="Profil · Profile">
         <div className="grid gap-3 sm:grid-cols-2">
           <Field
@@ -546,6 +547,7 @@ export function BuilderForm({
           />
           <Field
             label={`Titre (${langTag})`}
+            ai={lang}
             value={resume.profile.headline[lang]}
             onChange={(v) => update((d) => ((d.profile.headline[lang] = v), d))}
           />
