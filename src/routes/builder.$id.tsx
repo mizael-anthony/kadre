@@ -90,7 +90,7 @@ function Builder() {
   return (
     <div className="min-h-screen bg-background">
       <header className="sticky top-0 z-40 border-b border-border/60 bg-background/90 backdrop-blur print:hidden">
-        <div className="mx-auto flex max-w-[1600px] flex-wrap items-center gap-3 px-5 py-3">
+        <div className="mx-auto flex max-w-400 flex-wrap items-center gap-3 px-5 py-3">
           <Button asChild variant="ghost" size="sm">
             <Link to="/dashboard">
               <ArrowLeft className="h-4 w-4" />
@@ -107,7 +107,7 @@ function Builder() {
                 return d;
               })
             }
-            className="h-9 w-full max-w-[260px] font-medium"
+            className="h-9 w-full max-w-65 font-medium"
           />
 
           <Tabs value={lang} onValueChange={(v) => setLang(v as Lang)}>
