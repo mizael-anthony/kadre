@@ -1,5 +1,6 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
-import { ArrowLeft, Copy, FileText, Plus, Trash2 } from "lucide-react";
+import { ArrowLeft, Copy, FileText, GitBranch, Plus, Trash2 } from "lucide-react";
+import { createVariant } from "@/lib/cv/variant";
 import { toast } from "sonner";
 import { useResumes } from "@/lib/cv/storage";
 import { emptyResume, uid, type Resume } from "@/lib/cv/types";
@@ -72,6 +73,12 @@ function Dashboard() {
     toast.success("CV dupliqué");
   };
 
+  const makeVariant = (r: Resume) => {
+    const v = createVariant(r);
+    commit([v, ...(resumes ?? [])]);
+    toast.success("Variante créée");
+  };
+
   const remove = (r: Resume) => {
     commit((resumes ?? []).filter((x) => x.id !== r.id));
     toast.success("CV supprimé");
@@ -129,14 +136,21 @@ function Dashboard() {
           </div>
         ) : (
           <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {resumes.map((r) => (
+            {resumes
+              .filter((r) => !r.parentId || !resumes.some((p) => p.id === r.parentId))
+              .map((r) => {
+                const variants = resumes.filter((v) => v.parentId === r.id);
+                return (
               <article
                 key={r.id}
                 className="flex flex-col rounded-xl border border-border bg-card p-5 transition-shadow hover:shadow-md"
               >
                 <div className="flex items-start justify-between gap-3">
                   <h2 className="font-display text-lg font-semibold leading-snug">{r.title}</h2>
-                  <Badge variant="secondary">{TEMPLATE_LABEL[r.template]}</Badge>
+                  <div className="flex gap-1">
+                    {r.parentId && <Badge variant="outline">Variante</Badge>}
+                    <Badge variant="secondary">{TEMPLATE_LABEL[r.template]}</Badge>
+                  </div>
                 </div>
                 <p className="mt-1 text-sm text-muted-foreground">
                   {r.profile.firstName || r.profile.lastName
@@ -169,8 +183,42 @@ function Dashboard() {
                     <Trash2 className="h-4 w-4" />
                   </Button>
                 </div>
+                <Button
+                  size="sm"
+                  variant="ghost"
+                  className="mt-2 justify-start"
+                  onClick={() => makeVariant(r)}
+                >
+                  <GitBranch className="h-4 w-4" />
+                  Créer une variante
+                </Button>
+                {variants.length > 0 && (
+                  <ul className="mt-3 space-y-2 border-t border-border pt-3">
+                    {variants.map((v) => (
+                      <li key={v.id} className="flex items-center gap-2 text-sm">
+                        <GitBranch className="h-3.5 w-3.5 shrink-0 text-muted-foreground" />
+                        <Link
+                          to="/builder/$id"
+                          params={{ id: v.id }}
+                          className="min-w-0 flex-1 truncate hover:underline"
+                        >
+                          {v.title}
+                        </Link>
+                        {v.jobTarget && <Badge variant="secondary">{v.jobTarget.score}%</Badge>}
+                        <button
+                          aria-label="Supprimer la variante"
+                          onClick={() => remove(v)}
+                          className="text-muted-foreground hover:text-foreground"
+                        >
+                          <Trash2 className="h-3.5 w-3.5" />
+                        </button>
+                      </li>
+                    ))}
+                  </ul>
+                )}
               </article>
-            ))}
+                );
+              })}
           </div>
         )}
       </main>
