@@ -5,6 +5,7 @@ import { toast } from "sonner";
 import { useResume } from "@/lib/cv/storage";
 import type { ExportMode, Lang, TemplateKey } from "@/lib/cv/types";
 import { BuilderForm } from "@/components/cv/BuilderForm";
+import { JobAnalysisDialog } from "@/components/cv/JobAnalysisDialog";
 import { PrintDocument, ScaledPreview } from "@/components/cv/ResumePaper";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -137,6 +138,15 @@ function Builder() {
               ))}
             </SelectContent>
           </Select>
+
+          <JobAnalysisDialog resume={resume} lang={lang} />
+          {resume.parentId && (
+            <Button asChild variant="ghost" size="sm">
+              <Link to="/builder/$id" params={{ id: resume.parentId }}>
+                Variante · voir le CV parent
+              </Link>
+            </Button>
+          )}
 
           <div className="ml-auto flex items-center gap-2">
             <Select value={exportMode} onValueChange={(v) => setExportMode(v as ExportMode)}>
