@@ -31,7 +31,10 @@ export function JobAnalysisDialog({ resume, lang }: { resume: Resume; lang: Lang
   const [result, setResult] = useState<JobAnalysis | null>(null);
 
   const analyze = async () => {
-    if (!url.trim() && !text.trim()) return toast.error("Ajoutez un lien ou le texte de l'offre.");
+    if (!url.trim() && !text.trim()) {
+      toast.error("Ajoutez un lien ou le texte de l'offre.");
+      return;
+    }
     setLoading(true);
     setResult(null);
     try {
