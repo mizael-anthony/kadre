@@ -69,8 +69,26 @@ export const SECTION_KEYS: SectionKey[] = [
 export type TemplateKey = "classic" | "modern" | "minimal";
 export type ExportMode = "fr" | "en" | "bilingual";
 
+export type JobAnalysis = {
+  url: string;
+  title: string;
+  company: string;
+  keywords: string[];
+  matched: string[];
+  missing: string[];
+  score: number;
+  suggestions: string[];
+  sectionOrder: string[];
+  priorityTech: string[];
+  analyzedAt: string;
+};
+
 export type Resume = {
   id: string;
+  /** Set when this resume is a variant (sub-CV) of another. */
+  parentId?: string;
+  /** Job offer this variant targets. */
+  jobTarget?: JobAnalysis;
   title: string;
   createdAt: string;
   updatedAt: string;
